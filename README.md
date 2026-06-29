@@ -53,19 +53,30 @@ https://seohyunjun.github.io/Archive/<purpose>/<YYYY-MM-DD>/<file>.html
 ## 🧩 새 차트 추가 → 임베드 절차
 
 1. Plotly figure를 **독립 실행형 HTML**로 저장합니다.
+   - 헤드에 `<meta name="viewport" content="width=device-width, initial-scale=1">` 포함.
    - 헤드에 Plotly CDN(`<script src="https://cdn.plot.ly/plotly-x.y.z.min.js">`)을 포함.
+   - 차트가 iframe을 꽉 채우도록 반응형(autosize)으로: `fig.update_layout(autosize=True)`,
+     그리고 페이지 CSS로 `.plotly-graph-div{width:100%!important;height:100%!important;}`.
    - 민감 정보 없이 시각화 결과만 포함.
    - 파이썬 예시: `fig.write_html("chart-01-foo.html", include_plotlyjs="cdn", full_html=True)`
 2. `<purpose>/<YYYY-MM-DD>/` 폴더에 넣고 `git add` → `commit` → `push`.
-3. 블로그 본문(HTML 모드)에서 `<iframe>`으로 불러옵니다.
+3. 블로그 본문(HTML 모드)에서 **비율 래퍼 + iframe**으로 불러옵니다.
+
+> 티스토리 스킨(hELLO 등) 본문 폭은 테마마다 달라서, iframe에 `width="800"`처럼
+> **고정 크기를 주면** 잘리거나 가로 스크롤이 생깁니다. iframe에는 크기를 주지 말고
+> 래퍼가 **폭 100% + 비율 높이(`padding-top %`)**로 잡게 합니다.
 
 ```html
-<iframe
-  src="https://seohyunjun.github.io/Archive/pension-analysis/2026-06-29/chart-01-employment-by-company-size.html"
-  loading="lazy" scrolling="no"
-  style="width:100%;height:484px;border:0;overflow:hidden;display:block;"
-  title="Employment by company size"></iframe>
+<div style="position:relative;width:100%;padding-top:60%;overflow:hidden;box-sizing:border-box;">
+  <iframe
+    src="https://seohyunjun.github.io/Archive/pension-analysis/2026-06-29/chart-01-employment-by-company-size.html"
+    loading="lazy" scrolling="no"
+    style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
+    title="Employment by company size"></iframe>
+</div>
 ```
 
-- `height`는 차트 높이 + 여백(약 24px)으로 맞춥니다.
+- `padding-top`(%) = **높이 ÷ 폭 × 100** (예: 800px 폭에서 480px 높이 → `60%`).
+- iframe엔 **고정 width/height 금지**, 비율은 래퍼의 `padding-top`으로만.
 - 차단되는 CDN 스크립트는 본문이 아닌 **iframe 내부 문서**에서만 로드됩니다.
+- (스타일 가이드 `skills.md`에서는 이 래퍼를 `.chart` + `--ratio`/`--ratio-m`로 표준화)

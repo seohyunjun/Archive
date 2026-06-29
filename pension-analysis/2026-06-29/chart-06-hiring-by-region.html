@@ -13,7 +13,8 @@
 
 <script>
 (function(){function fit(){if(!window.Plotly)return;
-  document.querySelectorAll('.plotly-graph-div').forEach(function(d){Plotly.Plots.resize(d);});}
+  document.querySelectorAll('.plotly-graph-div').forEach(function(d){
+    Plotly.relayout(d,{autosize:true}); Plotly.Plots.resize(d);});}
   window.addEventListener('resize',fit);
   window.addEventListener('load',function(){setTimeout(fit,60);});
 })();
