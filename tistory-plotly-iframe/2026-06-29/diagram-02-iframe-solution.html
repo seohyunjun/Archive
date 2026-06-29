@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>iframe으로 해결하기</title>
+<style>
+  html,body{margin:0;padding:10px;background:#fff;
+    font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;}
+  .mermaid{display:flex;justify-content:center;}
+  .mermaid svg{max-width:100%;height:auto;}
+</style>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({
+    startOnLoad:true, securityLevel:"loose", theme:"base", flowchart:{curve:"basis"},
+    themeVariables:{
+      primaryColor:"#eef4fb", primaryBorderColor:"#4575b4", primaryTextColor:"#1f2933",
+      lineColor:"#52616b", fontFamily:"Pretendard, Apple SD Gothic Neo, sans-serif",
+      fontSize:"16px"
+    }
+  });
+</script>
+</head><body>
+<pre class="mermaid">
+flowchart LR
+  A["📱 티스토리 글"] -->|"창문(iframe)으로<br/>불러오기"| D["🏠 깃허브 페이지<br/>(github.io)"]
+  D -->|"여기선<br/>안 막혀요"| B["☁️ plotly 그림 창고"]
+  B --> D
+  D --> E["😀 차트가<br/>잘 보여요!"]
+</pre>
+</body></html>

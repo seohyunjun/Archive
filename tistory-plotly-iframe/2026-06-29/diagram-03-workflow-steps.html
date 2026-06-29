@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>따라하기 4단계</title>
+<style>
+  html,body{margin:0;padding:10px;background:#fff;
+    font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;}
+  .mermaid{display:flex;justify-content:center;}
+  .mermaid svg{max-width:100%;height:auto;}
+</style>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({
+    startOnLoad:true, securityLevel:"loose", theme:"base", flowchart:{curve:"basis"},
+    themeVariables:{
+      primaryColor:"#eef4fb", primaryBorderColor:"#4575b4", primaryTextColor:"#1f2933",
+      lineColor:"#52616b", fontFamily:"Pretendard, Apple SD Gothic Neo, sans-serif",
+      fontSize:"16px"
+    }
+  });
+</script>
+</head><body>
+<pre class="mermaid">
+flowchart TD
+  S1["1단계 · 차트를 HTML 파일로 저장"] --> S2["2단계 · 깃허브(Archive)에 올리기"]
+  S2 --> S3["3단계 · 깃허브 페이지 켜기 (처음 한 번만)"]
+  S3 --> S4["4단계 · 블로그에 iframe 한 줄 붙이기"]
+  S4 --> S5["🎉 차트 완성!"]
+</pre>
+</body></html>
